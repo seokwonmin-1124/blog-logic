@@ -25,9 +25,9 @@ def convertSet(set):
         "opt": set[3],
     }
 
-    _set["title"] = set[1][10:-2]
+    _set["title"] = set[1][10:-2].replace(" ", "-")
     _set["opt"] = set[3][8:-1]
-    print(_set["date"])
+    print(_set)
     _set["date"] = checkOpt(_set)
 
     return _set
@@ -50,4 +50,4 @@ def checkOpt(set):
 
 lorem = "Magna dolore sit exercitation qui eiusmod nostrud veniam adipisicing incididunt."
 
-# createTopic('test.md', lorem)
+createTopic('test.md', lorem)
