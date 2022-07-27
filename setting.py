@@ -7,9 +7,8 @@ def createTopic(fname, topic):
         set = f.readlines()[0:5]
         set = [x.strip() for x in set]
         f.close()
-        print(set)
+
         result = convertSet(set)
-        print(result)
     
     f = open(f"./test/{result['title']}_{result['date']}.txt", "w")
     f.write(f"{result}\n{topic}")
@@ -27,7 +26,6 @@ def convertSet(set):
 
     _set["title"] = set[1][10:-2].replace(" ", "-")
     _set["opt"] = set[3][8:-1]
-    print(_set)
     _set["date"] = checkOpt(_set)
 
     return _set
@@ -35,15 +33,16 @@ def convertSet(set):
 
 def checkOpt(set):
     opt = set["opt"]
+
     if opt == "ymd":
-        # print(str(datetime.now())[0:10])
         return str(datetime.now())[0:10]
+
     elif opt == "ymdhm":
-        # print(str(datetime.now())[0:16].replace(" ", "(") + ")")
         return str(datetime.now())[0:16].replace(" ", "(") + ")"
+
     elif opt == "ymdhms":
-        # print(str(datetime.now())[0:19].replace(" ", "(") + ")")
         return str(datetime.now())[0:19].replace(" ", "(") + ")"
+
     else:
         print(opt)
         return False
