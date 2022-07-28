@@ -2,8 +2,8 @@
 # 글 작성 조건 -> set.md
 from datetime import datetime
 
-def createTopic(fname, topic):
-    with open(f"./test/{fname}") as f: # 여기선 파일을 로컬 경로에서 찾지만 웹상에선 inpt 값을 바로 받아와서 실행시킬 예정
+def createTopic(setFileName, topic):
+    with open(f"./test/{setFileName}") as f: # 여기선 파일을 로컬 경로에서 찾지만 웹상에선 inpt 값을 바로 받아와서 실행시킬 예정
         set = f.readlines()[0:5]
         set = [x.strip() for x in set]
         f.close()
@@ -47,6 +47,5 @@ def checkOpt(set):
         print(opt)
         return False
 
-lorem = "Magna dolore sit exercitation qui eiusmod nostrud veniam adipisicing incididunt."
-
-createTopic('test.md', lorem)
+topic = "글 내용"
+createTopic('test.md', topic)
