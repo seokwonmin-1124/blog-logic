@@ -1,5 +1,6 @@
-# set 사용방법
+# setting.py 사용방법
 ```md
+<!-- ./test/test.md -->
 {
     "title": "first",
     "date": date.today(),
