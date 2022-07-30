@@ -1,8 +1,9 @@
 from flask import Flask, request, redirect
 import sqlite3
-import database as db
+import _db as db
 
 app = Flask(__name__)
+nextId = 1
 
 @app.route('/')
 def index():
@@ -17,17 +18,15 @@ def set():
 
 @app.route('/read/<int:id>/')
 def read(id):
-    rows = str(db.readRow(id))
-    return f"""
-    <p>{rows}</p>
-    """
+    row = str(db.readRow(id))
+    return f"id값이 {id}인 데이터의 값은 {row} 입니다"
 
 @app.route('/create/', methods=['GET', 'POST'])
 def create():
+    global nextId
     if request.method == 'GET':
         content = '''
             <form action="/create/" method="POST">
-                <p><input type="number" name="id" placeholder="id"></p>
                 <p><input type="text" name="title" placeholder="title"></p>
                 <p><textarea name="body" placeholder="body"></textarea></p>
                 <p><input type="submit" value="create"></p>
@@ -36,11 +35,12 @@ def create():
         return content
 
     elif request.method == 'POST':
-        id = int(request.form['id'])
         title = request.form['title']
         body = request.form['body']
-        db.createRow(id, title, body)
-        return redirect('/')
+        db.createRow(nextId, title, body)
+        url = f'/read/{nextId}/'
+        nextId += 1
+        return redirect(url)
 
 @app.route('/update/<int:id>/', methods=['GET', 'POST'])
 def update(id):
