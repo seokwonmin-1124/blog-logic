@@ -1,9 +1,8 @@
 from flask import Flask, request, redirect
 import sqlite3
-import _db as db
+import database as db
 
 app = Flask(__name__)
-nextId = 1
 
 @app.route('/')
 def index():
@@ -23,7 +22,6 @@ def read(id):
 
 @app.route('/create/', methods=['GET', 'POST'])
 def create():
-    global nextId
     if request.method == 'GET':
         content = '''
             <form action="/create/" method="POST">
@@ -37,9 +35,8 @@ def create():
     elif request.method == 'POST':
         title = request.form['title']
         body = request.form['body']
-        db.createRow(nextId, title, body)
-        url = f'/read/{nextId}/'
-        nextId += 1
+        id = db.createRow(title, body)
+        url = f'/read/{id}/'
         return redirect(url)
 
 @app.route('/update/<int:id>/', methods=['GET', 'POST'])
@@ -68,3 +65,6 @@ def delete(id):
     return redirect('/')
 
 app.run(debug=True, port=2020)
+
+# 문제: id값 autoincrement로 설정했는데 create 시 id값이 None이라고 뜸
+# 해결: id값을 primary key로 설정하고 autoincrement를 사용하지 않아야 함
