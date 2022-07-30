@@ -1,7 +1,9 @@
 import sqlite3
 
+db = '_test.db'
+
 def setDb():
-    conn = sqlite3.connect('_test.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     cursor.execute("CREATE TABLE IF NOT EXISTS topic (id INTEGER PREMENT KEY, title text, body text)")
     conn.commit()
@@ -9,7 +11,7 @@ def setDb():
     return print("DB 초기 세팅 완료")
 
 def createRow(id, title, body):
-    conn = sqlite3.connect('_test.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     cursor.execute('''
         INSERT INTO topic(id, title, body) VALUES(?,?,?)''',
@@ -20,7 +22,7 @@ def createRow(id, title, body):
     return print("Row 생성 완료")
 
 def readRow(opt=all):
-    conn = sqlite3.connect('_test.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
 
     if opt == all:
@@ -34,7 +36,7 @@ def readRow(opt=all):
     return rows
 
 def updateRow(id, title, body):
-    conn = sqlite3.connect('_test.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
     cursor.execute(f"UPDATE topic SET title = '{title}', body = '{body}' WHERE id = '{id}'")
     conn.commit()
@@ -42,7 +44,7 @@ def updateRow(id, title, body):
     return print("수정 완료")
 
 def delRow(id):
-    conn = sqlite3.connect('_test.db')
+    conn = sqlite3.connect(db)
     cursor = conn.cursor()
 
     if id == all:
