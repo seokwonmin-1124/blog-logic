@@ -1,25 +1,26 @@
 import sqlite3
 
-db = '_test.db'
+db = 'topic.db'
 
 def setDb():
     conn = sqlite3.connect(db)
     cursor = conn.cursor()
-    cursor.execute("CREATE TABLE IF NOT EXISTS topic (id INTEGER PREMENT KEY, title text, body text)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS topic (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, title text, body text)")
     conn.commit()
     conn.close()
     return print("DB 초기 세팅 완료")
 
-def createRow(id, title, body):
+def createRow(title, body):
     conn = sqlite3.connect(db)
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO topic(id, title, body) VALUES(?,?,?)''',
-        (id, title, body)
+        INSERT INTO topic(title, body) VALUES(?,?)''',
+        (title, body)
     )
     conn.commit()
     conn.close()
-    return print("Row 생성 완료")
+    lastId = cursor.lastrowid
+    return lastId
 
 def readRow(opt=all):
     conn = sqlite3.connect(db)
@@ -55,3 +56,11 @@ def delRow(id):
     conn.commit()
     conn.close()
     return print("삭제 완료")
+
+def lastRowId():
+    conn = sqlite3.connect(db)
+    cursor = conn.cursor()
+    id = cursor.lastrowid
+    return id
+
+# setDb()
