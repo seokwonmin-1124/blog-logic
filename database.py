@@ -32,7 +32,6 @@ def readRow(opt=all):
         cursor.execute(f"SELECT * FROM topic WHERE id = '{opt}'")
 
     rows = cursor.fetchall()
-    print(rows)
     conn.close()
     return rows
 
@@ -56,11 +55,5 @@ def delRow(id):
     conn.commit()
     conn.close()
     return print("삭제 완료")
-
-def lastRowId():
-    conn = sqlite3.connect(db)
-    cursor = conn.cursor()
-    id = cursor.lastrowid
-    return id
 
 # setDb()
