@@ -9,12 +9,6 @@ def index():
     rows = str(db.readRow())
     return rows
 
-@app.route('/set/')
-def set():
-    db.setDb()
-    db.readRow(all)
-    return "db is ready"
-
 @app.route('/read/<int:id>/')
 def read(id):
     row = str(db.readRow(id))
@@ -65,6 +59,3 @@ def delete(id):
     return redirect('/')
 
 app.run(debug=True, port=2020)
-
-# 문제: id값 autoincrement로 설정했는데 create 시 id값이 None이라고 뜸
-# 해결: id값을 primary key로 설정하고 autoincrement를 사용하지 않아야 함
