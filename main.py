@@ -1,3 +1,4 @@
+from re import template
 from flask import Flask, request, redirect
 import sqlite3
 import database as db
@@ -6,13 +7,20 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    rows = str(db.readRow())
-    return rows
+    rows = db.readRow()
+    print(rows)
+    li = ''
+    for row in rows:
+        li += f"<li><a href='/read/{row[0]}/'>{row[1]}</a></li>"
+    li += f"<p><a href='/create/'>create</a></p>"
+    return li
 
 @app.route('/read/<int:id>/')
 def read(id):
-    row = str(db.readRow(id))
-    return f"id값이 {id}인 데이터의 값은 {row} 입니다"
+    row = db.readRow(id)
+    title = row[0][1]
+    body = row[0][2]
+    return f"<h2>{title}</h2><p>{body}</p><a href='/'>home</a> <a href='/update/{id}/'>update</a> <a href='/delete/{id}/'>delete</a></p>"
 
 @app.route('/create/', methods=['GET', 'POST'])
 def create():
@@ -57,5 +65,13 @@ def update(id):
 def delete(id):
     db.delRow(id)
     return redirect('/')
+
+@app.errorhandler(IndexError)
+def indexError(error):
+    return "없는 글입니다"
+
+@app.errorhandler(404)
+def notFound(error):
+    return "404 Not Found, 없는 페이지입니다."
 
 app.run(debug=True, port=2020)
