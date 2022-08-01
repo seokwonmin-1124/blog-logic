@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: 'NanumSquareRound', sans-serif;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 1rem;
+}
+
+h2 {
+    font-weight: bold;
+}
+
+small {
+    font-weight: bold;
+    font-size: 1em;
+}
+
+h6 {
+    font-weight: bold;
+}
+
+.comment {
+    display: flex;
+}
+
+.commentBox {
+    width: 88%;
+    resize: none;
+}
+
+.commentBtn {
+    margin-left: 10px;
+    font-size: 0.9em;
+    width: 84px;
+}
+
+.menuBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
