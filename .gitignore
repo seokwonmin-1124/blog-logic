@@ -1,5 +1,1 @@
-.venv
-venv.md
-test.py
-test.db
-topic.db
+/app/topic.db
