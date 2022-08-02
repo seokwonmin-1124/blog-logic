@@ -24,12 +24,12 @@
         <hr>
         <div class="body">
             <p>
-                {{ body }}
+                {{ body|markdown }}
             </p>
             <p class="menuBar">
-                <a class="menu" href="/read/{{ id - 1 }}">이전 글</a>
+                <!-- <a class="menu" href="/read/{{ id - 1 }}">이전 글</a> -->
                 <a class="menu" href="/">홈</a>
-                <a class="menu" href="/read/{{ id + 1 }}">다음 글</a>
+                <!-- <a class="menu" href="/read/{{ id + 1 }}">다음 글</a> -->
             </p>
         </div>
         <hr>
