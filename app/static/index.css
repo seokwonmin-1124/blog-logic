@@ -15,8 +15,7 @@ main {
     padding: 1rem;
 }
 
-.header {
+.headerItem {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
