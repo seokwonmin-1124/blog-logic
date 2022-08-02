@@ -12,8 +12,17 @@
     <main>
         <div class="header">
             <h2>main page</h2>
-            <a href="/create/">글 쓰기</a>
+            <div class="headerItem">
+                <a href="/create">글 쓰기</a>
+                <span>||</span>
+                {% if login == True %}
+                <a href="/dologout">로그아웃</a>
+                {% else %}
+                <a href="/login">로그인</a>
+                {% endif %}
+            </div>
         </div>
+        <hr>
         {% if rows == [] %}
             <p>글이 없습니다.</p>
         {% else %}
@@ -34,7 +43,7 @@
                         {% else %}
                             <td><a href="/read/{{ row[0] }}">{{ row[1] }}</a></td>
                         {% endif %}
-                        {% if (row[2]|length) > 20 %}
+                        {% if (row[2]|length) > 25 %}
                             <td>{{ row[2][:25] }}...</td>
                         {% else %}
                             <td>{{ row[2] }}</td>
