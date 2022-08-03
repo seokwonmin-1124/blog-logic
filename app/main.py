@@ -1,13 +1,14 @@
 from flask import Flask, request, redirect, render_template, session
 import database as db
+import private as key
 from flaskext.markdown import Markdown
 
 app = Flask(__name__)
-app.secret_key = 'super secret key'
+app.secret_key = key.APPKEY
 Markdown(app, extensions=['nl2br', 'fenced_code'])
 
-ID = "lesh"
-PW = "fptnldlqslek"
+ID = key.ID
+PW = key.PW
 
 login = False
 
