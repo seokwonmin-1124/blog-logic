@@ -12,9 +12,14 @@ PW = key.PW
 
 login = False
 
-@app.route('/printit')
-def printloginTF():
-    return str(login)
+@app.route('/')
+def index():
+    global login
+    rows = db.readRow()
+    print(rows)
+    if "userId" in session:
+        login = True
+    return render_template('index.html', rows=rows, login=login)
 
 @app.route('/login')
 def login():
@@ -39,15 +44,6 @@ def dologin():
 def dologout():
     session.pop("userId")
     return redirect("/login")
-
-@app.route('/')
-def index():
-    global login
-    rows = db.readRow()
-    print(rows)
-    if "userId" in session:
-        login = True
-    return render_template('index.html', rows=rows, login=login)
 
 @app.route('/read/<int:id>/')
 def read(id):
